@@ -1,0 +1,120 @@
+Rights_HS
+=========
+
+About
+-----
+RightsHS is a Ruby On Rails plugin for simplyfying rights checking on the 
+controller-action level.
+
+Usage
+-----
+Right check are defined in controller. You can specify multiple checks for each
+action as well as controller-wide checks. The most basic condition definition
+looks like this:
+
+class MyController < ApplicationController
+  include RightsHS # put this into ApplicationController for simplicity
+
+  def protected_action1
+    # your action code
+  end
+  # BASIC rights check declaration
+  check(:some_object_name).is(:some_condition_name).for(:protected_action1)
+
+  def protected_action2
+    # your action code
+  end
+  # EXTENDED rights check declaration
+  check(:some_object_name).is(:some_condition_name).of(:scope_object).for(:protected_action2)
+
+  # controller wide
+  check(:some_object_name).is(:some_condition_name).everytime
+
+  # controller wide and scoped
+  check(:some_object_name).is(:some_condition_name).of(:scope_object).everytime
+
+end
+
+What this does is that it tries to load an object with from:
+- instance method - by calling some_object_name on the controller
+- session or params under the key :some_object_name 
+and then call 
+- is_some_condition_name for basic rights declaration
+- is_some_condition_name_of for extented right declaration
+- has_permissions(:some_condition_name) for basic rights declaration
+- has_permissions(:some_condition_name, scope_object) for extended rights declaration
+
+If the check fails then RightsHS::RightsViolationError is raised which you should
+handle in the rescue_action error handler and display an error page.
+
+Controller wide permissions work the same way and are checked for every action.
+
+Look into tests to see all possible use-cases.
+
+Examples
+--------
+
+# Basic checks
+class MyController < ApplicationController
+  include RightsHS # put this into ApplicationController for simplicity
+
+  def admin_only_action
+    # your action code
+  end
+  check(:current_user).is(:admin).for(:admin_only_action)
+
+end
+
+What this does:
+- gets user object by calling method current_user on the controller
+- calls whichever is present on the user object in this order: is_admin, has_permissions(:admin)
+- depending on the result raises an error
+
+# ------------------------
+# Extended (scoped) checks
+class MyController < ApplicationController
+  include RightsHS # put this into ApplicationController for simplicity
+
+  def owner_only_action
+    # user need the own the object
+  end
+  # EXTENDED rights check declaration
+  check(:current_user).is(:owner).of(:record).for(:owner_only_action)
+
+end
+
+What this does:
+- gets user object by calling method current_user on the controller
+- gets the record object by which ever is succesfull: 
+    - call record method, 
+    - load an Record model with id params[:record] or params["record_id"]
+    - load an Record model with id session[:record] or session["record_id"]
+- calls whichever is present on the user object in this order: 
+    - is_owner_of(record), 
+    - has_permissions(:owner, record)
+- depending on the result raises an error
+
+# ------------------------
+# Extended (scoped) checks
+class MyController < ApplicationController
+  include RightsHS # put this into ApplicationController for simplicity
+
+  def owner_only_action
+    # user need the own the object
+  end
+  # EXTENDED rights check declaration
+  check(:current_user).is(:owner).of(:record).for(:owner_only_action)
+
+end
+
+What this does:
+- gets user object by calling method current_user on the controller
+- gets the record object by which ever is succesfull: 
+    - call record method, 
+    - load an Record model with id params[:record] or params["record_id"]
+    - load an Record model with id session[:record] or session["record_id"]
+- calls whichever is present on the user object in this order: 
+    - is_owner_of(record), 
+    - has_permissions(:owner, record)
+- depending on the result raises an error
+

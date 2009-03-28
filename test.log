@@ -1,0 +1,66 @@
+Loaded suite test/rights_js_test
+Started
+EEEEEEEEEEEE
+Finished in 0.0 seconds.
+
+  1) Error:
+test_global_rights_fail(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c8a9bc @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+  2) Error:
+test_global_rights_succeed(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c8a2a0 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+  3) Error:
+test_global_scoped_rights_fail(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c89b84 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+  4) Error:
+test_global_scoped_rights_succeed(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c89468 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+  5) Error:
+test_no_object(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c88d4c @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+  6) Error:
+test_object_in_method(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c88630 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+  7) Error:
+test_object_in_session_and_params(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c87f14 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+  8) Error:
+test_object_validate_by_method_fail(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c877f8 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+  9) Error:
+test_object_validate_by_method_succeed(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c870dc @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+ 10) Error:
+test_object_validate_by_permission_fail(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c869c0 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+ 11) Error:
+test_object_with_scope_param_fail(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c862a4 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+ 12) Error:
+test_object_with_scope_param_succeed(RightsJSTest):
+NoMethodError: protected method `session' called for #<RightsTestable:0xb7c85b88 @params={}, @session={}>
+    test/rights_js_test.rb:8:in `setup'
+
+12 tests, 0 assertions, 0 failures, 12 errors
